@@ -10,12 +10,48 @@ namespace ApiCalculadora.Controllers
     [ApiController]
     public class CalculatorController : Controller
     { 
-        [HttpGet("{firstNumber}/{secondNumber}")]
-        public ActionResult<string> Get(string firstNumber, string secondNumber)
+        [HttpGet("sum/{firstNumber}/{secondNumber}")]
+        public ActionResult<string> Sum(string firstNumber, string secondNumber)
         {
             if(IsNumeric(firstNumber) && IsNumeric(secondNumber))
             {
                 var sum = ConvertToDecimal(firstNumber) + ConvertToDecimal(secondNumber);
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid Request");
+        }
+
+        [HttpGet("sub/{firstNumber}/{secondNumber}")]
+        public ActionResult<string> Substraction(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber) - ConvertToDecimal(secondNumber);
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid Request");
+        }
+
+        [HttpGet("div/{firstNumber}/{secondNumber}")]
+        public ActionResult<string> Divisao(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber) / ConvertToDecimal(secondNumber);
+                return Ok(sum.ToString());
+            }
+
+            return BadRequest("Invalid Request");
+        }
+
+        [HttpGet("multi/{firstNumber}/{secondNumber}")]
+        public ActionResult<string> Multiplicacao(string firstNumber, string secondNumber)
+        {
+            if (IsNumeric(firstNumber) && IsNumeric(secondNumber))
+            {
+                var sum = ConvertToDecimal(firstNumber) * ConvertToDecimal(secondNumber);
                 return Ok(sum.ToString());
             }
 
