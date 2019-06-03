@@ -16,5 +16,14 @@ namespace ApiRestAspNet.Models
         public Person()
         {
         }
+
+        public Person(long id, string firstName, string lastName, string address, string gender)
+        {
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            Address = address;
+            Gender = gender;
+        }
     }
 }
