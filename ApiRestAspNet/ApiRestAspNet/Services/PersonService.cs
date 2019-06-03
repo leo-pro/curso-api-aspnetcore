@@ -14,7 +14,7 @@ namespace ApiRestAspNet.Services
 
         public PersonService(RestApiContext restApiContext)
         {
-            restApiContext = _restApiContext;
+            _restApiContext = restApiContext;
         }
 
         // Get All Persons
