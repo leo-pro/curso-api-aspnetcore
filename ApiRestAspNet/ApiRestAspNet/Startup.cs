@@ -31,10 +31,13 @@ namespace ApiRestAspNet
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<RestApiContext>(options => options.UseNpgsql(Configuration.GetConnectionString("RestApiContext"), builder => 
-            builder.MigrationsAssembly("ApiRestAspNet")));
+            services.AddDbContext<RestApiContext>(options => options.UseNpgsql(Configuration.GetConnectionString("RestApiContext"), 
+                builder => builder.MigrationsAssembly("ApiRestAspNet")));
+
+            services.AddApiVersioning();
 
             services.AddScoped<PersonService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

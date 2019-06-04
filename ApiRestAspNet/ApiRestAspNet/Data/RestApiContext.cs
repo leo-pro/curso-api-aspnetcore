@@ -13,6 +13,6 @@ namespace ApiRestAspNet.Data
         {
         }
 
-        public DbSet<Person> Person { get; set; }
+        public DbSet<Person> person { get; set; }
     }
 }

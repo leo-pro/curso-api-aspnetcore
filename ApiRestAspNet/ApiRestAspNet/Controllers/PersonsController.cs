@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiRestAspNet.Services;
+using ApiRestAspNet.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiRestAspNet.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class PersonsController : ControllerBase
     {
+        private readonly PersonService _personService;
+
+        public PersonsController(PersonService personService)
+        {
+            _personService = personService;
+        }
+
         // GET api/persons
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<List<Person>>> GetPersons()
         {
-            return new string[] { "value1", "value2" };
+            var persons = await _personService.FindAllAsync();
+            return persons;
         }
 
         // GET api/persons/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public async Task<ActionResult<Person>> GetPersonsById(int id)
         {
-            return "value";
+            var person = await _personService.FindByIdAsync(id);
+            return person;
         }
 
         // POST api/persons

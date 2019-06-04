@@ -20,13 +20,13 @@ namespace ApiRestAspNet.Services
         // Get All Persons
         public async Task<List<Person>> FindAllAsync()
         {
-            return await _restApiContext.Person.ToListAsync();
+            return await _restApiContext.person.ToListAsync();
         }
 
         // Find Person By your Id
-        public async Task<Person> FindByIdAsync(long? id)
+        public async Task<Person> FindByIdAsync(long? _id)
         {
-            return await _restApiContext.Person.SingleOrDefaultAsync(p => p.Id.Equals(id));
+            return await _restApiContext.person.SingleOrDefaultAsync(p => p.id.Equals(_id));
         }
 
         // Add new Person
@@ -41,8 +41,8 @@ namespace ApiRestAspNet.Services
         {
             try
             {
-                var obj = await _restApiContext.Person.FindAsync(id);
-                _restApiContext.Person.Remove(obj);
+                var obj = await _restApiContext.person.FindAsync(id);
+                _restApiContext.person.Remove(obj);
                 await _restApiContext.SaveChangesAsync();
             }
             catch(Exception e)
@@ -55,9 +55,9 @@ namespace ApiRestAspNet.Services
         //Update person's data
         public async Task<Person> UpdateAsync(Person person)
         {
-            if (!Exist(person.Id)) return new Person();
+            if (!Exist(person.id)) return new Person();
 
-            var result = await _restApiContext.Person.SingleOrDefaultAsync(p => p.Id.Equals(person.Id));
+            var result = await _restApiContext.person.SingleOrDefaultAsync(p => p.id.Equals(person.id));
             try
             {
                 _restApiContext.Entry(result).CurrentValues.SetValues(person);
@@ -71,9 +71,9 @@ namespace ApiRestAspNet.Services
         }
 
         // verifying if person exists in DB
-        private bool Exist(long id)
+        private bool Exist(long _id)
         {
-            return _restApiContext.Person.Any(p => p.Id.Equals(id));
+            return _restApiContext.person.Any(p => p.id.Equals(_id));
         }
     }
 }
